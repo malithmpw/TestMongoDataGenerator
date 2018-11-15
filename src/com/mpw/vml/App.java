@@ -162,11 +162,13 @@ public class App {
                 do {
                     Date dateTime = cal.getTime();
                     String value = mongoFormat.format(dateTime);
-                    String formattedDateTime = value + "T" + ThreadLocalRandom.current().nextInt(8, 21) + ":" + ThreadLocalRandom.current().nextInt(0, 60) + ":" + ThreadLocalRandom.current().nextInt(0, 60) + "." + ThreadLocalRandom.current().nextInt(1, 999999);
+                    int nextInt = ThreadLocalRandom.current().nextInt(8, 21);
+                    String formattedDateTime = value + "T" + (nextInt < 10 ? ("0" + nextInt) : nextInt) + ":" + ThreadLocalRandom.current().nextInt(10, 60) + ":" + 20 + "." + ThreadLocalRandom.current().nextInt(111111, 999999);
 
                     for (int i = 0; i < Integer.parseInt(noOfEventsForDay.getText()); i++) {
                         long eid = eventId + 1;
-                        String formattedEventTime = value + "T" + ThreadLocalRandom.current().nextInt(8, 21) + ":" + ThreadLocalRandom.current().nextInt(0, 60) + ":" + ThreadLocalRandom.current().nextInt(0, 60) + "." + ThreadLocalRandom.current().nextInt(1, 999999);
+                        int nexthour = ThreadLocalRandom.current().nextInt(8, 21);
+                        String formattedEventTime = value + "T" + (nexthour < 10 ? ("0" + nexthour) : nexthour) + ":" + ThreadLocalRandom.current().nextInt(10, 60) + ":" + 20 + "." + ThreadLocalRandom.current().nextInt(111111, 999999);
 
                         String uuid = UUID.randomUUID().toString();
                         DBObject dbObject = (DBObject) JSON
